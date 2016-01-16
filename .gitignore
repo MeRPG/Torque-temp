@@ -1,0 +1,14 @@
+/.classpath
+/.project
+/.settings
+/nbproject
+/target
+.*.sw[a-p]
+/build
+/bin
+/dist
+.DS_Store
+*.iml
+*.ipr
+*.iws
+.idea/
