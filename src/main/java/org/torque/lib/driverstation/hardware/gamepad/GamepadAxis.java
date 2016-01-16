@@ -41,6 +41,6 @@ public class GamepadAxis {
         for(Map.Entry<Long, Double> entry : recentPositions.asMap().entrySet()) {
             hermiteInterpolator.addSamplePoint(entry.getKey(), new double[] {entry.getValue()});
         }
-        return 0;//TODO
+        return hermiteInterpolator.getPolynomials()[0].derivative().value(System.currentTimeMillis());//TODO not sure if this works
     }
 }
