@@ -16,13 +16,13 @@ public abstract class Motor {
     public abstract boolean getReversed();
     public abstract void stop();
 
-    public void setDead(boolean dead) {
+    public synchronized void setDead(boolean dead) {
         this.dead = dead;
         if(this.dead) {
             stop();
         }
     }
-    public boolean isDead() {
+    public synchronized boolean isDead() {
         return this.dead;
     }
 }

@@ -14,29 +14,29 @@ public class TalonMotor extends Motor {
     }
 
     @Override
-    public void setPower(double power) {
+    public synchronized void setPower(double power) {
         if(!isDead()) {
             this.wpiController.set(power);
         }
     }
 
     @Override
-    public double getPower() {
+    public synchronized double getPower() {
         return this.wpiController.get();
     }
 
     @Override
-    public void setReversed(boolean reversed) {
+    public synchronized void setReversed(boolean reversed) {
         this.wpiController.setInverted(reversed);
     }
 
     @Override
-    public boolean getReversed() {
+    public synchronized boolean getReversed() {
         return this.wpiController.getInverted();
     }
 
     @Override
-    public void stop() {
+    public synchronized void stop() {
         setPower(0D);
     }
 }

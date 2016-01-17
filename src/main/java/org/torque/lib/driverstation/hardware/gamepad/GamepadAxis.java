@@ -32,14 +32,14 @@ public class GamepadAxis {
         return Math.abs(getRaw());
     }
 
-    public void updateCalculus() {
+    public synchronized void updateCalculus() {
         recentPositions.put(System.currentTimeMillis(), getRaw());
     }
 
-    public double getVelocity() {
+    public synchronized double getVelocity() {
         HermiteInterpolator hermiteInterpolator = new HermiteInterpolator();
         for(Map.Entry<Long, Double> entry : recentPositions.asMap().entrySet()) {
-            hermiteInterpolator.addSamplePoint(entry.getKey(), new double[] {entry.getValue()});
+            hermiteInterpolator.addSamplePoint(entry.getKey(), new double[]{entry.getValue()});
         }
         return hermiteInterpolator.getPolynomials()[0].derivative().value(System.currentTimeMillis());//TODO not sure if this works
     }
