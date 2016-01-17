@@ -34,16 +34,16 @@ class RepeatingTask extends Thread {
 
     @Override
     public void run() {
-        while(!task.isCanelled()) {
+        while(!task.isCancelled()) {
             if(System.currentTimeMillis() >= targetMillis) {
                 break;
             }
             Timer.waitMillis(1);
         }
 
-        while(!task.isCanelled()) {
+        while(!task.isCancelled()) {
             task.run();
-            if(task.isCanelled()) {
+            if(task.isCancelled()) {
                 break;
             }
 

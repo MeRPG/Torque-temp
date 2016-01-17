@@ -5,29 +5,29 @@ package org.torque.lib.concurrent;
  * @author Jaxon A Brown
  */
 public abstract class Task {
-    private boolean isCanelled;
+    private boolean isCancelled;
 
     /**
      * Construct a new task, set cancelled to false.
      */
     public Task() {
-        isCanelled = false;
+        isCancelled = false;
     }
 
     /**
      * Cancel the task
-     * @param canelled the state of cancellation to set the task to
+     * @param cancelled the state of cancellation to set the task to
      */
-    public final synchronized void setCanelled(boolean canelled) {
-        this.isCanelled = canelled;
+    public final synchronized void setCancelled(boolean cancelled) {
+        this.isCancelled = cancelled;
     }
 
     /**
      * Check if this task is cancelled
      * @return true if the task is cancelled, false otherwise
      */
-    public final synchronized boolean isCanelled() {
-        return isCanelled;
+    public final synchronized boolean isCancelled() {
+        return isCancelled;
     }
 
     /**

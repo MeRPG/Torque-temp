@@ -31,7 +31,7 @@ class DelayedTask extends Thread {
 
     @Override
     public void run() {
-        while(!task.isCanelled()) {
+        while(!task.isCancelled()) {
             if(System.currentTimeMillis() >= targetMillis) {
                 task.run();
                 break;
