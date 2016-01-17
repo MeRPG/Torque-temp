@@ -3,6 +3,7 @@ package org.torque.lib.concurrent;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
+ * Internal repeating task thread. This class will wait a certain time, then call it's task on a defined interval.
  * @author Jaxon A Brown
  */
 class RepeatingTask extends Thread {
@@ -10,6 +11,12 @@ class RepeatingTask extends Thread {
     private long targetMillis;
     private long interval;
 
+    /**
+     * Constructs a repeating task, which will start itself.
+     * @param task Task to call after the delay and every period.
+     * @param waitMillis Time to delay.
+     * @param interval Interval on which to call the task.
+     */
     RepeatingTask(Task task, long waitMillis, long interval) {
         this.task = task;
         this.targetMillis = waitMillis + System.currentTimeMillis();
@@ -17,6 +24,10 @@ class RepeatingTask extends Thread {
         super.start();
     }
 
+    /**
+     * The task which will be called.
+     * @return the task this DelayedTask is tied to.
+     */
     public Task getTask() {
         return task;
     }

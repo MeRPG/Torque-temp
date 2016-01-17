@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 /**
+ * Singleton class to handle the scheduling of tasks.
  * @author Jaxon A Brown
  */
 public class Scheduler {
@@ -14,7 +15,7 @@ public class Scheduler {
 
     private HashSet<Thread> tasks;
 
-    public Scheduler() {
+    private Scheduler() {
         this.tasks = new LinkedHashSet<Thread>();
     }
 
@@ -22,18 +23,29 @@ public class Scheduler {
         tasks.remove(thread);
     }
 
-    public synchronized void scheduleTaskDelayed(Task task, long delay) {
+    private synchronized void scheduleTaskDelayed(Task task, long delay) {
         tasks.add(new DelayedTask(task, delay));
     }
 
-    public synchronized void scheduleTaskRepeating(Task task, long delay, long interval) {
+    private synchronized void scheduleTaskRepeating(Task task, long delay, long interval) {
         tasks.add(new RepeatingTask(task, delay, interval));
     }
 
+    /**
+     * Schedule a delayed task
+     * @param task task to fire
+     * @param delay milliseconds after which to fire the task
+     */
     public static void scheduleDelayedTask(Task task, long delay) {
         getScheduler().scheduleTaskDelayed(task, delay);
     }
 
+    /**
+     * Schedule a repeating task
+     * @param task task to fire
+     * @param delay milliseconds after which to start the repeater
+     * @param interval millisecond interval upon which to fire task
+     */
     public static void scheduleRepeatingTask(Task task, long delay, long interval) {
         getScheduler().scheduleTaskRepeating(task, delay, interval);
     }

@@ -9,36 +9,79 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Joystick on a Logitech Gamepad.
  * @author Jaxon A Brown
  */
 public class GamepadAxis {
     private Joystick wpiJoystick;
-    private int port;
 
-    private Cache<Long, Double> recentPositions;
+    private Cache<Long, Double> recentPositionsX;
+    private Cache<Long, Double> recentPositionsY;
 
-    public GamepadAxis(Joystick wpiJoystick, int port) {
+    GamepadAxis(Joystick wpiJoystick) {
         this.wpiJoystick = wpiJoystick;
-        this.port = port;
 
-        this.recentPositions = CacheBuilder.newBuilder().expireAfterWrite(500, TimeUnit.MILLISECONDS).build();
+        this.recentPositionsX = CacheBuilder.newBuilder().expireAfterWrite(500, TimeUnit.MILLISECONDS).build();
+        this.recentPositionsY = CacheBuilder.newBuilder().expireAfterWrite(500, TimeUnit.MILLISECONDS).build();
     }
 
-    public double getRaw() {
-        return wpiJoystick.getRawAxis(port);
+    /**
+     * Get the x value of the axis
+     * @return [-1,1] double on the x axis
+     */
+    public double getX() {
+        return wpiJoystick.getX();
     }
 
-    public double getMagnitude() {
-        return Math.abs(getRaw());
+    /**
+     * Get the y value of the axis
+     * @return [-1,1] double on the y axis
+     */
+    public double getY() {
+        return wpiJoystick.getY();
     }
 
+    /**
+     * Get the magnitude of the x value of the axis
+     * @return [0,1] double
+     */
+    public double getXMagnitude() {
+        return Math.abs(getX());
+    }
+
+    /**
+     * Get the magnitude of the y value of the axis
+     * @return [0,1] double
+     */
+    public double getYMagnitude() {
+        return Math.abs(getY());
+    }
+
+    /**
+     * This method is not recommended for use yet.
+     */
     public synchronized void updateCalculus() {
-        recentPositions.put(System.currentTimeMillis(), getRaw());
+        recentPositionsX.put(System.currentTimeMillis(), getX());
+        recentPositionsY.put(System.currentTimeMillis(), getY());
     }
 
-    public synchronized double getVelocity() {
+    /**
+     * This method is not recommended for use yet.
+     */
+    public synchronized double getXVelocity() {
         HermiteInterpolator hermiteInterpolator = new HermiteInterpolator();
-        for(Map.Entry<Long, Double> entry : recentPositions.asMap().entrySet()) {
+        for(Map.Entry<Long, Double> entry : recentPositionsX.asMap().entrySet()) {
+            hermiteInterpolator.addSamplePoint(entry.getKey(), new double[]{entry.getValue()});
+        }
+        return hermiteInterpolator.getPolynomials()[0].derivative().value(System.currentTimeMillis());//TODO not sure if this works
+    }
+
+    /**
+     * This method is not recommended for use yet.
+     */
+    public synchronized double getYVelocity() {
+        HermiteInterpolator hermiteInterpolator = new HermiteInterpolator();
+        for(Map.Entry<Long, Double> entry : recentPositionsY.asMap().entrySet()) {
             hermiteInterpolator.addSamplePoint(entry.getKey(), new double[]{entry.getValue()});
         }
         return hermiteInterpolator.getPolynomials()[0].derivative().value(System.currentTimeMillis());//TODO not sure if this works

@@ -89,12 +89,43 @@ public abstract class TorqueRobot extends RobotBase {
         return this.m_ds.isNewControlData();
     }
 
+    /**
+     * Called when the robot is first started.
+     */
     public abstract void robotInit();
+
+    /**
+     * Called when the robot is first stopped.
+     */
     public abstract void disabledInit();
+
+    /**
+     * Called when the Teleop is first started.
+     */
     public abstract void teleopInit();
+
+    /**
+     * Called when the Test is first started.
+     */
     public abstract void testInit();
+
+    /**
+     * Called periodically throughout robot disablement.
+     */
     public abstract void disabledPeriodic();
+
+    /**
+     * Called to run the autonomous phase.
+     */
     public abstract void autonomous();
+
+    /**
+     * Called periodically throughout the Teleop phase.
+     */
     public abstract void teleopPeriodic();
+
+    /**
+     * Called periodically when the robot is in testing.
+     */
     public abstract void testPeriodic();
 }

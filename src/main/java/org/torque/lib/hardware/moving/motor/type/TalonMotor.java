@@ -4,11 +4,16 @@ import edu.wpi.first.wpilibj.TalonSRX;
 import org.torque.lib.hardware.moving.motor.Motor;
 
 /**
- * Created by Jaxon A Brown on 1/16/2016.
+ * Talon motor.
+ * @author Jaxon A Brown
  */
 public class TalonMotor extends Motor {
     private TalonSRX wpiController;
 
+    /**
+     * Talon SRX motor controller.
+     * @param channel motor controller's channel.
+     */
     public TalonMotor(int channel) {
         this.wpiController = new TalonSRX(channel);
     }

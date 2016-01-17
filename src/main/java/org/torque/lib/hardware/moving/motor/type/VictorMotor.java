@@ -4,11 +4,16 @@ import edu.wpi.first.wpilibj.Victor;
 import org.torque.lib.hardware.moving.motor.Motor;
 
 /**
- * Created by Jaxon A Brown on 1/16/2016.
+ * Victor Motor.
+ * @author Jaxon A Brown
  */
 public class VictorMotor extends Motor {
     private Victor wpiController;
 
+    /**
+     * Victor motor controller.
+     * @param channel motor controller's channel.
+     */
     public VictorMotor(int channel) {
         this.wpiController = new Victor(channel);
     }
