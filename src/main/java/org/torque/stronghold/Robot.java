@@ -1,5 +1,7 @@
 package org.torque.stronghold;
 
+import org.torque.lib.driverstation.software.dashboard.Dashboard;
+import org.torque.lib.driverstation.software.dashboard.DashboardEntry;
 import org.torque.lib.robot.TorqueRobot;
 
 /**
