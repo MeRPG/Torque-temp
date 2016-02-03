@@ -6,5 +6,6 @@ package org.torque.stronghold;
  * @author Jaxon A Brown
  */
 public class ConfigurationService {
-
+    public static int FORWARD_FACING_CAMERA_ID;
+    public static int REAR_FACING_CAMERA_ID;
 }
