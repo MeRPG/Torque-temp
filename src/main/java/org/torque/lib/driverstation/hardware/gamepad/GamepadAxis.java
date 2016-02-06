@@ -2,8 +2,10 @@ package org.torque.lib.driverstation.hardware.gamepad;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import org.apache.commons.math3.analysis.interpolation.HermiteInterpolator;
+import org.torque.lib.def.Hand;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -14,12 +16,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class GamepadAxis {
     private Joystick wpiJoystick;
+    private GenericHID.Hand hand;
 
     private Cache<Long, Double> recentPositionsX;
     private Cache<Long, Double> recentPositionsY;
 
-    GamepadAxis(Joystick wpiJoystick) {
+    GamepadAxis(Joystick wpiJoystick, Hand hand) {
         this.wpiJoystick = wpiJoystick;
+        this.hand = GenericHID.Hand.kLeft;
 
         this.recentPositionsX = CacheBuilder.newBuilder().expireAfterWrite(500, TimeUnit.MILLISECONDS).build();
         this.recentPositionsY = CacheBuilder.newBuilder().expireAfterWrite(500, TimeUnit.MILLISECONDS).build();
@@ -30,7 +34,7 @@ public class GamepadAxis {
      * @return [-1,1] double on the x axis
      */
     public double getX() {
-        return wpiJoystick.getX();
+        return wpiJoystick.getX(hand);
     }
 
     /**
@@ -38,7 +42,7 @@ public class GamepadAxis {
      * @return [-1,1] double on the y axis
      */
     public double getY() {
-        return wpiJoystick.getY();
+        return wpiJoystick.getY(hand);
     }
 
     /**

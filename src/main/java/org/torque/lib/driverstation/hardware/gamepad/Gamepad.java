@@ -23,8 +23,8 @@ public class Gamepad {
         this.driver = driver;
         this.wpiJoystick = new Joystick(this.driver.getJoystickPort());
 
-        this.leftStick = new GamepadAxis(wpiJoystick);
-        this.rightStick = new GamepadAxis(wpiJoystick);
+        this.leftStick = new GamepadAxis(wpiJoystick, Hand.LEFT);
+        this.rightStick = new GamepadAxis(wpiJoystick, Hand.RIGHT);
     }
 
     /**

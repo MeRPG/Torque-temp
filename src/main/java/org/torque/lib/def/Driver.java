@@ -6,7 +6,7 @@ package org.torque.lib.def;
  */
 public enum Driver {
     ONE(0),
-    TWO(0);
+    TWO(1);
 
     private int joystickPort;
 

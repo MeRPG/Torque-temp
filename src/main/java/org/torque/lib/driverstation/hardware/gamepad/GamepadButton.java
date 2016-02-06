@@ -6,15 +6,15 @@ package org.torque.lib.driverstation.hardware.gamepad;
  */
 public enum GamepadButton {
     A(0),
-    B(0),
-    X(0),
-    Y(0),
-    START(0),
-    BACK(0),
-    LEFT_JOYSTICK(0),
-    RIGHT_JOYSTICK(0),
-    LEFT_BUMPER(0),
-    RIGHT_BUMPER(0);
+    B(1),
+    X(2),
+    Y(3),
+    START(7),
+    BACK(6),
+    LEFT_JOYSTICK(8),
+    RIGHT_JOYSTICK(9),
+    LEFT_BUMPER(4),
+    RIGHT_BUMPER(5);
 
     private int port;
 
