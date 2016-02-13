@@ -6,7 +6,7 @@ package org.torque.lib.def;
  */
 public enum Hand {
     LEFT(0, 1),
-    RIGHT(2, 3);
+    RIGHT(4, 5);
 
     private int xPort;
     private int yPort;

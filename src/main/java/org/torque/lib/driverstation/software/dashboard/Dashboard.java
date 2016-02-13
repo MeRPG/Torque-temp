@@ -34,22 +34,26 @@ public class Dashboard {
         } catch(NoSuchFieldException | IllegalAccessException ex) {
             throw new RuntimeException("Couldn't start Dashboard.", ex);
         }
-        this.dashboardEntries = Maps.newHashMap();
-        networkTable.addTableListener((source, key, value, isNew) -> {
-            if(!isNew) {
-                return;
-            }
-            if(!dashboardEntries.containsKey(key)) {
-                return;
-            }
+        try {
+            this.dashboardEntries = Maps.newHashMap();
+            networkTable.addTableListener((source, key, value, isNew) -> {
+                if(!isNew) {
+                    return;
+                }
+                if(!dashboardEntries.containsKey(key)) {
+                    return;
+                }
 
-            DashboardEntry dashboardEntry = dashboardEntries.get(key);
-            if(dashboardEntry.getConfigurationField() == null) {
-                return;
-            }
+                DashboardEntry dashboardEntry = dashboardEntries.get(key);
+                if(dashboardEntry.getConfigurationField() == null) {
+                    return;
+                }
 
-            dashboardEntry.writeToField(value);
-        }, true);
+                dashboardEntry.writeToField(value);
+            }, true);
+        } catch(Exception ex) {
+            throw new RuntimeException("Couldn't start Dashboard.", ex);
+        }
     }
 
     /**

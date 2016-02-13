@@ -1,5 +1,10 @@
 package org.torque.stronghold;
 
+import com.ni.vision.NIVision;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.vision.AxisCamera;
+import edu.wpi.first.wpilibj.vision.USBCamera;
+import javafx.scene.Camera;
 import org.torque.lib.def.Driver;
 import org.torque.lib.def.Hand;
 import org.torque.lib.driverstation.hardware.gamepad.Gamepad;
@@ -7,6 +12,8 @@ import org.torque.lib.driverstation.hardware.gamepad.GamepadButton;
 import org.torque.lib.robot.TorqueRobot;
 import org.torque.stronghold.module.DriveTrain;
 import org.torque.stronghold.module.Launcher;
+
+import java.lang.reflect.Field;
 
 /**
  * Main robot class.
@@ -17,6 +24,10 @@ public class Robot extends TorqueRobot {
     private Gamepad gamepad2;
     private DriveTrain driveTrain;
     private Launcher launcher;
+
+    private AxisCamera acam;
+
+    private NIVision.Image frame;
 
     public Robot() {
 
@@ -29,6 +40,14 @@ public class Robot extends TorqueRobot {
 
         this.driveTrain = new DriveTrain();
         this.launcher = new Launcher();
+
+        //try {
+        //    Field field = ConfigurationService.class.getField("LAUNCHER_LAUNCH_POWER");
+        //    DashboardEntry entry = new DashboardEntry("maxSpeed", field);
+        //    Dashboard.getInstance().addDashboardEntry(entry);
+        //} catch(Exception ex) {
+        //    ex.printStackTrace();
+        //}
 
         //ConfigurationService.FORWARD_FACING_CAMERA_ID =
         //        NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
@@ -47,7 +66,7 @@ public class Robot extends TorqueRobot {
     //private MotorLink right;
     //private Motor whiteSpinner;
     //private MotorLink greenLauncher;
-    //private int camses;
+    private int camses;
 
     @Override
     public void teleopInit() {
@@ -67,6 +86,15 @@ public class Robot extends TorqueRobot {
 
         //camses = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         //NIVision.IMAQdxConfigureGrab(camses);
+
+        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+//
+        //camses = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        //NIVision.IMAQdxConfigureGrab(camses);
+//
+        //NIVision.IMAQdxStartAcquisition(camses);
+
+        acam = new AxisCamera("10.52.83.11");
     }
 
     @Override
@@ -76,6 +104,18 @@ public class Robot extends TorqueRobot {
 
         this.launcher.setCollectorSpeed(gamepad2.getTrigger(Hand.RIGHT) - gamepad2.getTrigger(Hand.LEFT));
         this.launcher.setLaunching(gamepad2.getButtonState(GamepadButton.B));
+
+
+        //NIVision.IMAQdxGrab(camses, frame, 1);
+        //CameraServer.getInstance().setImage(frame);
+
+        try {
+            acam.getImage(frame);
+            CameraServer.getInstance().setImage(frame);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
         //left.setPower(deadZoneValue(joystick.getRawAxis(1)));
         //right.setPower(deadZoneValue(joystick.getRawAxis(5)));
         //NIVision.Image image = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
@@ -105,7 +145,7 @@ public class Robot extends TorqueRobot {
 
     @Override
     public void disabledInit() {
-
+        //NIVision.IMAQdxStopAcquisition(camses);
     }
 
     @Override

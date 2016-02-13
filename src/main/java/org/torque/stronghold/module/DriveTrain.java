@@ -22,6 +22,7 @@ public class DriveTrain {
     }
 
     public void setLeft(double power) {
+        power *= DRIVE_POWER;
         if(reversed) {
             right.setPower(-power);
         } else {
@@ -30,6 +31,7 @@ public class DriveTrain {
     }
 
     public void setRight(double power) {
+        power *= DRIVE_POWER;
         if(reversed) {
             left.setPower(-power);
         } else {
