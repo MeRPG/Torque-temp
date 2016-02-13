@@ -3,6 +3,7 @@ package org.torque.lib.driverstation.hardware.gamepad;
 import edu.wpi.first.wpilibj.Joystick;
 import org.torque.lib.def.Driver;
 import org.torque.lib.def.Hand;
+import org.torque.stronghold.ConfigurationService;
 
 /**
  * Logitech Gamepad wrapper class for the joystick.
@@ -45,6 +46,17 @@ public class Gamepad {
         return getButtonState(button.getPort());
     }
 
+    public double getTrigger(Hand hand) {
+        switch(hand) {
+            case LEFT:
+                return deadZone(wpiJoystick.getRawAxis(2));
+            case RIGHT:
+                return deadZone(wpiJoystick.getRawAxis(3));
+            default:
+                return 0;
+        }
+    }
+
     /**
      * Gets the GamepadAxis of the hand identified
      * @param hand left or right?
@@ -59,5 +71,9 @@ public class Gamepad {
             default:
                 return null;
         }
+    }
+
+    private static double deadZone(double input) {
+        return Math.abs(input) <= ConfigurationService.JOYSTICK_DEADZONE ? 0 : input;
     }
 }

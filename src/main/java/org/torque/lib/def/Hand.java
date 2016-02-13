@@ -1,20 +1,25 @@
 package org.torque.lib.def;
 
-import edu.wpi.first.wpilibj.GenericHID;
-
 /**
  * Simple as that. HI hand.
  * @author Jaxon A Brown
  */
 public enum Hand {
-    LEFT,
-    RIGHT;
+    LEFT(0, 1),
+    RIGHT(2, 3);
 
-    public int getRawAxisPort() {
-        if(this == LEFT) {
-            return 0;
-        } else {
-            return 1;
-        }
+    private int xPort;
+    private int yPort;
+    Hand(int xPort, int yPort) {
+        this.xPort = xPort;
+        this.yPort = yPort;
+    }
+
+    public int getRawXAxisPort() {
+        return xPort;
+    }
+
+    public int getRawYAxisPort() {
+        return yPort;
     }
 }

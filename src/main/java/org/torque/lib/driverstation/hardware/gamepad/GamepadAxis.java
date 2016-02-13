@@ -2,10 +2,10 @@ package org.torque.lib.driverstation.hardware.gamepad;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import org.apache.commons.math3.analysis.interpolation.HermiteInterpolator;
 import org.torque.lib.def.Hand;
+import org.torque.stronghold.ConfigurationService;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -16,14 +16,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class GamepadAxis {
     private Joystick wpiJoystick;
-    private GenericHID.Hand hand;
+    private Hand hand;
 
     private Cache<Long, Double> recentPositionsX;
     private Cache<Long, Double> recentPositionsY;
 
     GamepadAxis(Joystick wpiJoystick, Hand hand) {
         this.wpiJoystick = wpiJoystick;
-        this.hand = GenericHID.Hand.kLeft;
+        this.hand = hand;
 
         this.recentPositionsX = CacheBuilder.newBuilder().expireAfterWrite(500, TimeUnit.MILLISECONDS).build();
         this.recentPositionsY = CacheBuilder.newBuilder().expireAfterWrite(500, TimeUnit.MILLISECONDS).build();
@@ -34,7 +34,7 @@ public class GamepadAxis {
      * @return [-1,1] double on the x axis
      */
     public double getX() {
-        return wpiJoystick.getX(hand);
+        return deadZone(wpiJoystick.getRawAxis(hand.getRawXAxisPort()));
     }
 
     /**
@@ -42,7 +42,7 @@ public class GamepadAxis {
      * @return [-1,1] double on the y axis
      */
     public double getY() {
-        return wpiJoystick.getY(hand);
+        return deadZone(wpiJoystick.getRawAxis(hand.getRawYAxisPort()));
     }
 
     /**
@@ -89,5 +89,9 @@ public class GamepadAxis {
             hermiteInterpolator.addSamplePoint(entry.getKey(), new double[]{entry.getValue()});
         }
         return hermiteInterpolator.getPolynomials()[0].derivative().value(System.currentTimeMillis());//TODO not sure if this works
+    }
+
+    private static double deadZone(double input) {
+        return Math.abs(input) <= ConfigurationService.JOYSTICK_DEADZONE ? 0 : input;
     }
 }
