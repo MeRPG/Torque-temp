@@ -73,6 +73,10 @@ public class Gamepad {
         }
     }
 
+    public Joystick getWpiJoystick() {
+        return wpiJoystick;
+    }
+
     private static double deadZone(double input) {
         return Math.abs(input) <= ConfigurationService.JOYSTICK_DEADZONE ? 0 : input;
     }

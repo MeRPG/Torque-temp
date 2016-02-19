@@ -22,6 +22,10 @@ public class Launcher {
         this.launcher = new MotorLink(launchLower, launchUpper);
     }
 
+    /**
+     * Power on/off the launcher.
+     * @param launching True to turn on the launcher.
+     */
     public void setLaunching(boolean launching) {
         if(launching) {
             launcher.setPower(LAUNCHER_LAUNCH_POWER);
@@ -30,6 +34,10 @@ public class Launcher {
         }
     }
 
+    /**
+     * Set the speed of the collector.
+     * @param collectorSpeed Speed of the collector. [-1, 1]
+     */
     public void setCollectorSpeed(double collectorSpeed) {
         this.collector.setPower(collectorSpeed);
     }

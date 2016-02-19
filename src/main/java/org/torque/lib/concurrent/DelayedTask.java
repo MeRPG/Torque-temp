@@ -33,7 +33,11 @@ class DelayedTask extends Thread {
     public void run() {
         while(!task.isCancelled()) {
             if(System.currentTimeMillis() >= targetMillis) {
-                task.run();
+                try {
+                    task.run();
+                } catch(Throwable ex) {
+                    new RuntimeException("Uncaught error in thread.", ex).printStackTrace();
+                }
                 break;
             }
             Timer.waitMillis(1);

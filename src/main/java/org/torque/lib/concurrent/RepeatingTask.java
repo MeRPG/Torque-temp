@@ -42,7 +42,11 @@ class RepeatingTask extends Thread {
         }
 
         while(!task.isCancelled()) {
-            task.run();
+            try {
+                task.run();
+            } catch(Throwable ex) {
+                new RuntimeException("Uncaught error in thread.", ex).printStackTrace();
+            }
             if(task.isCancelled()) {
                 break;
             }
