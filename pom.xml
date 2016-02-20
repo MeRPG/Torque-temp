@@ -36,6 +36,13 @@
             <systemPath>${project.basedir}/wpilib/current/lib/NetworkTables.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>org.opencv</groupId>
+            <artifactId>opencv</artifactId>
+            <version>3.0.0-1.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/wpilib/opencv/opencv-3.0.0-1.1-linux-frc.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
             <version>3.6</version>

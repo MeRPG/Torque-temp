@@ -27,6 +27,9 @@ public class ImageSendbackThread extends Task {
         NIVision.IMAQdxConfigureGrab(camses);
 
         this.latestImage = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        CameraServer.getInstance().setSize(1);
+        CameraServer.getInstance().setQuality(30);
     }
 
     @Override

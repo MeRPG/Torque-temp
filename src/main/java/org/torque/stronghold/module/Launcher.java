@@ -12,6 +12,9 @@ public class Launcher {
     private Motor collector;
     private MotorLink launcher;
 
+    private boolean wasLaunching = false;
+    private long startedLaunching;
+
     public Launcher() {
         this.collector = new VictorMotor(PORT_LAUNCH_COLLECTOR);
         this.collector.setReversed(true);
@@ -29,9 +32,18 @@ public class Launcher {
     public void setLaunching(boolean launching) {
         if(launching) {
             launcher.setPower(LAUNCHER_LAUNCH_POWER);
+            if(!wasLaunching) {
+                wasLaunching = true;
+                startedLaunching = System.currentTimeMillis();
+            }
         } else {
             launcher.setPower(0);
+            wasLaunching = false;
         }
+    }
+
+    public boolean isAtFullSpeed() {
+        return wasLaunching && startedLaunching < System.currentTimeMillis() - 3000;
     }
 
     /**

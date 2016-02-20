@@ -73,6 +73,10 @@ public class Gamepad {
         }
     }
 
+    public void setRumble(RumbleType type, float power) {
+        wpiJoystick.setRumble(type.getType(), power);
+    }
+
     public Joystick getWpiJoystick() {
         return wpiJoystick;
     }
