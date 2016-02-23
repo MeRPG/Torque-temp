@@ -10,7 +10,8 @@ import static org.torque.stronghold.ConfigurationService.*;
  */
 public class Launcher {
     private Motor collector;
-    private MotorLink launcher;
+    private Motor launchLower;
+    private Motor launchUpper;
 
     private boolean wasLaunching = false;
     private long startedLaunching;
@@ -19,10 +20,9 @@ public class Launcher {
         this.collector = new VictorMotor(PORT_LAUNCH_COLLECTOR);
         this.collector.setReversed(true);
 
-        Motor launchLower = new VictorMotor(PORT_LAUNCH_LOWER_LAUNCH);
-        Motor launchUpper = new VictorMotor(PORT_LAUNCH_UPPER_LAUNCH);
+        launchLower = new VictorMotor(PORT_LAUNCH_LOWER_LAUNCH);
+        launchUpper = new VictorMotor(PORT_LAUNCH_UPPER_LAUNCH);
         launchUpper.setReversed(true);
-        this.launcher = new MotorLink(launchLower, launchUpper);
     }
 
     /**
@@ -31,19 +31,21 @@ public class Launcher {
      */
     public void setLaunching(boolean launching) {
         if(launching) {
-            launcher.setPower(LAUNCHER_LAUNCH_POWER);
+            launchLower.setPower(LAUNCHER_LAUNCH_POWER);
+            launchUpper.setPower(LAUNCHER_LAUNCH_POWER * LAUNCHER_LAUNCH_UPPER_FACTOR);
             if(!wasLaunching) {
                 wasLaunching = true;
                 startedLaunching = System.currentTimeMillis();
             }
         } else {
-            launcher.setPower(0);
+            launchLower.setPower(0);
+            launchUpper.setPower(0);
             wasLaunching = false;
         }
     }
 
     public boolean isAtFullSpeed() {
-        return wasLaunching && startedLaunching < System.currentTimeMillis() - 3000;
+        return wasLaunching && startedLaunching < System.currentTimeMillis() - 1250;
     }
 
     /**

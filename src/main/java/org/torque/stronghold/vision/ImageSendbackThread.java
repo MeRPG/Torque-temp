@@ -37,7 +37,11 @@ public class ImageSendbackThread extends Task {
         if(shooterCam) {
             NIVision.IMAQdxGrab(camses, latestImage, 1);
         } else {
-            armCamera.getImage(latestImage);
+            NIVision.Image tempImage = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+            NIVision.Image tempImage2 = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+            armCamera.getImage(tempImage);
+            NIVision.imaqFlip(tempImage2, tempImage, NIVision.FlipAxis.HORIZONTAL_AXIS);
+            NIVision.imaqFlip(latestImage, tempImage2, NIVision.FlipAxis.VERTICAL_AXIS);
         }
         CameraServer.getInstance().setImage(latestImage);
     }

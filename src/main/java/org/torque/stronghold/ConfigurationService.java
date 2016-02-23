@@ -15,7 +15,10 @@ public class ConfigurationService {
     public static int PORT_LAUNCH_COLLECTOR = 4;
     public static int PORT_LAUNCH_UPPER_LAUNCH = 5;
     public static int PORT_LAUNCH_LOWER_LAUNCH = 6;
+    public static int PORT_ARM = 7;
 
     public static double LAUNCHER_LAUNCH_POWER = 1;
+    public static double LAUNCHER_LAUNCH_UPPER_FACTOR = 1;
     public static double DRIVE_POWER = 1;
+    public static double ARM_POWER = 0.4;
 }

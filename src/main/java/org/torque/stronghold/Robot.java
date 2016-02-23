@@ -12,6 +12,7 @@ import org.torque.lib.driverstation.hardware.gamepad.RumbleType;
 import org.torque.lib.driverstation.software.dashboard.Dashboard;
 import org.torque.lib.robot.TorqueRobot;
 import org.torque.stronghold.autoProgram.DriveForwardAuto;
+import org.torque.stronghold.module.Arm;
 import org.torque.stronghold.module.DriveTrain;
 import org.torque.stronghold.module.Launcher;
 import org.torque.stronghold.vision.ImageSendbackThread;
@@ -28,6 +29,7 @@ public class Robot extends TorqueRobot {
     public Gamepad gamepad2;
     public DriveTrain driveTrain;
     public Launcher launcher;
+    public Arm arm;
 
     public ImageSendbackThread imageSendbackThread;
     public AutoEngine autoEngine;
@@ -51,6 +53,7 @@ public class Robot extends TorqueRobot {
 
         this.driveTrain = new DriveTrain();
         this.launcher = new Launcher();
+        this.arm = new Arm();
     }
 
     @Override
@@ -60,25 +63,17 @@ public class Robot extends TorqueRobot {
 
     @Override
     public void teleopInit() {
-
+        SmartDashboard.putNumber("Upper Launcher Multiplier", ConfigurationService.LAUNCHER_LAUNCH_UPPER_FACTOR);
+        SmartDashboard.putNumber("Launcher Power", ConfigurationService.LAUNCHER_LAUNCH_POWER);
     }
 
     @Override
     public void teleopPeriodic() {
         if(this.gamepad1.getButtonState(GamepadButton.RIGHT_BUMPER)) {//If the right bumper is pressed, activate forward camera
-            //this.gamepad1.getWpiJoystick().setRumble(Joystick.RumbleType.kLeftRumble, 1f);//Test
             this.imageSendbackThread.setShooterCam(false);
-        } else if(this.gamepad1.getButtonState(GamepadButton.LEFT_BUMPER)) {//If the left bumper is pressed, activate the reverse camera
-            //this.gamepad1.getWpiJoystick().setRumble(Joystick.RumbleType.kRightRumble, 1f);//Test
-            this.imageSendbackThread.setShooterCam(true);
-        } else {//Test
-            //this.gamepad1.getWpiJoystick().setRumble(Joystick.RumbleType.kLeftRumble, 0);
-            //this.gamepad1.getWpiJoystick().setRumble(Joystick.RumbleType.kRightRumble, 0);
-        }
-
-        if(this.gamepad1.getButtonState(GamepadButton.START)) {//If the start button is pressed
             this.driveTrain.setReversed(false);//Set the drive train to forwards
-        } else if(this.gamepad1.getButtonState(GamepadButton.BACK)) {//If the back button is pressed
+        } else if(this.gamepad1.getButtonState(GamepadButton.LEFT_BUMPER)) {//If the left bumper is pressed, activate the reverse camera
+            this.imageSendbackThread.setShooterCam(true);
             this.driveTrain.setReversed(true);//Set the drive train to reverse
         }
 
@@ -87,10 +82,20 @@ public class Robot extends TorqueRobot {
         //Drive
         this.driveTrain.forzaDrive(-gamepad1.getAxis(Hand.RIGHT).getX(), gamepad1.getAxis(Hand.LEFT).getY());
 
+        ConfigurationService.LAUNCHER_LAUNCH_UPPER_FACTOR = SmartDashboard.getNumber("Upper Launcher Multiplier");
+        ConfigurationService.LAUNCHER_LAUNCH_POWER = SmartDashboard.getNumber("Launcher Power");
+
         //Set the white collecting wheel power. Use right - left triggers to use both inputs
         this.launcher.setCollectorSpeed(gamepad2.getTrigger(Hand.RIGHT) - gamepad2.getTrigger(Hand.LEFT));
         //If the user is holding down the B button, activate the launcher.
         this.launcher.setLaunching(gamepad2.getButtonState(GamepadButton.B));
+
+        double arm = gamepad2.getAxis(Hand.LEFT).getY();
+        if(Math.abs(arm) < 0.3) {
+            this.arm.setArmRaw(gamepad2.getAxis(Hand.RIGHT).getY());
+        } else {
+            this.arm.setArmPower(arm);
+        }
 
         if(this.isShotInPlace()) {
             this.gamepad1.setRumble(RumbleType.LIGHT, 1);

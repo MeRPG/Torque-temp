@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.torque</OriginalElement>
+  <nodes>
+    <node x="-83.5" y="-51.0">org.torque.lib.hardware.sensor.AntiLimitSwitch</node>
+    <node x="934.75" y="535.25">org.torque.stronghold.vision.ImageSendbackThread</node>
+    <node x="536.5" y="357.0">org.torque.stronghold.ConfigurationService</node>
+    <node x="-6.75" y="1140.25">org.torque.stronghold.module.DriveTrain</node>
+    <node x="436.75" y="1444.75">org.torque.stronghold.vision.VisionTest</node>
+    <node x="-938.75" y="298.0">org.torque.lib.driverstation.hardware.gamepad.RumbleType</node>
+    <node x="860.0" y="1290.75">org.torque.lib.driverstation.software.dashboard.DashboardEntry</node>
+    <node x="-950.25" y="228.25">org.torque.lib.driverstation.hardware.gamepad.GamepadButton</node>
+    <node x="-652.0" y="238.0">org.torque.lib.driverstation.hardware.gamepad.GamepadAxis</node>
+    <node x="126.25" y="-157.0">org.torque.lib.hardware.sensor.Callable</node>
+    <node x="-490.0" y="881.5">org.torque.lib.hardware.moving.motor.MotorLink</node>
+    <node x="221.0" y="55.0">org.torque.lib.hardware.sensor.LimitSwitch.LimitSwitchCallThread</node>
+    <node x="-40.0" y="980.0">org.torque.stronghold.module.Launcher</node>
+    <node x="-411.0" y="158.5">org.torque.lib.def.Hand</node>
+    <node x="221.25" y="1091.0">org.torque.stronghold.module.Arm</node>
+    <node x="1552.75" y="-302.75">org.torque.lib.concurrent.Timer</node>
+    <node x="1005.75" y="1371.5">org.torque.lib.driverstation.software.dashboard.Dashboard</node>
+    <node x="1275.25" y="-362.5">org.torque.lib.concurrent.Scheduler</node>
+    <node x="282.0" y="1355.0">org.torque.stronghold.defense.Defense</node>
+    <node x="277.5" y="-51.0">org.torque.lib.hardware.sensor.LimitSwitch</node>
+    <node x="181.25" y="356.25">org.torque.lib.robot.TorqueRobot</node>
+    <node x="1007.75" y="-58.25">org.torque.lib.concurrent.RepeatingTask</node>
+    <node x="-714.75" y="113.75">org.torque.lib.driverstation.hardware.gamepad.Gamepad</node>
+    <node x="-671.0" y="1020.75">org.torque.lib.hardware.moving.motor.type.VictorMotor</node>
+    <node x="747.0" y="872.5">org.torque.stronghold.autoProgram.AutoProgram</node>
+    <node x="-868.5" y="115.0">org.torque.lib.def.Driver</node>
+    <node x="351.75" y="441.0">org.torque.stronghold.Robot</node>
+    <node x="611.5" y="759.0">org.torque.stronghold.AutoEngine</node>
+    <node x="485.0" y="1351.25">org.torque.stronghold.vision.VisionCheck</node>
+    <node x="1429.5" y="-53.25">org.torque.lib.concurrent.DelayedTask</node>
+    <node x="-521.5" y="632.25">org.torque.lib.hardware.moving.motor.Motor</node>
+    <node x="1031.5" y="981.0">org.torque.stronghold.autoProgram.DriveForwardAuto</node>
+    <node x="-885.0" y="1025.75">org.torque.lib.hardware.moving.motor.type.TalonMotor</node>
+    <node x="1294.0" y="-185.75">org.torque.lib.concurrent.Task</node>
+    <node x="-140.0" y="55.0">org.torque.lib.hardware.sensor.AntiLimitSwitch.AntiLimitSwitchCallThread</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.torque.lib.hardware.moving.motor.type.VictorMotor" target="org.torque.lib.hardware.moving.motor.Motor">
+      <point x="0.0" y="-28.0" />
+      <point x="-575.0" y="995.75" />
+      <point x="-647.75" y="995.75" />
+      <point x="32.5" y="28.0" />
+    </edge>
+    <edge source="org.torque.stronghold.module.Launcher" target="org.torque.lib.hardware.moving.motor.type.VictorMotor">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.vision.VisionTest" target="org.torque.stronghold.vision.VisionCheck">
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.lib.robot.TorqueRobot">
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.stronghold.module.DriveTrain" target="org.torque.lib.hardware.moving.motor.MotorLink">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.module.Launcher" target="org.torque.lib.hardware.moving.motor.Motor">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.concurrent.RepeatingTask" target="org.torque.lib.concurrent.Task">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.sensor.AntiLimitSwitch.AntiLimitSwitchCallThread" target="org.torque.lib.hardware.sensor.AntiLimitSwitch">
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.sensor.LimitSwitch" target="org.torque.lib.hardware.sensor.Callable">
+      <point x="0.0" y="-28.0" />
+      <point x="370.0" y="-76.0" />
+      <point x="237.25" y="-76.0" />
+      <point x="37.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.sensor.Callable" target="org.torque.lib.concurrent.Task">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.moving.motor.type.TalonMotor" target="org.torque.lib.hardware.moving.motor.Motor">
+      <point x="0.0" y="-28.0" />
+      <point x="-785.5" y="995.75" />
+      <point x="-712.75" y="995.75" />
+      <point x="-32.5" y="28.0" />
+    </edge>
+    <edge source="org.torque.lib.driverstation.software.dashboard.Dashboard" target="org.torque.lib.driverstation.software.dashboard.DashboardEntry">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.moving.motor.MotorLink" target="org.torque.lib.hardware.moving.motor.Motor">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.AutoEngine" target="org.torque.stronghold.Robot">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.stronghold.vision.ImageSendbackThread">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.sensor.AntiLimitSwitch" target="org.torque.lib.hardware.sensor.Callable">
+      <point x="0.0" y="-28.0" />
+      <point x="30.5" y="-76.0" />
+      <point x="163.25" y="-76.0" />
+      <point x="-37.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.sensor.LimitSwitch.LimitSwitchCallThread" target="org.torque.lib.hardware.sensor.LimitSwitch">
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.lib.concurrent.DelayedTask" target="org.torque.lib.concurrent.Task">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.driverstation.hardware.gamepad.Gamepad" target="org.torque.lib.def.Driver">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.driverstation.hardware.gamepad.Gamepad" target="org.torque.lib.driverstation.hardware.gamepad.GamepadAxis">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.module.DriveTrain" target="org.torque.lib.hardware.moving.motor.type.TalonMotor">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.vision.ImageSendbackThread" target="org.torque.lib.concurrent.Task">
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.stronghold.module.Arm" target="org.torque.lib.hardware.moving.motor.type.VictorMotor">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.lib.driverstation.hardware.gamepad.Gamepad">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.AutoEngine" target="org.torque.stronghold.autoProgram.AutoProgram">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.driverstation.hardware.gamepad.GamepadAxis" target="org.torque.lib.def.Hand">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.stronghold.AutoEngine">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.sensor.AntiLimitSwitch" target="org.torque.lib.hardware.sensor.AntiLimitSwitch.AntiLimitSwitchCallThread">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.stronghold.module.Launcher">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.autoProgram.DriveForwardAuto" target="org.torque.stronghold.autoProgram.AutoProgram">
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="org.torque.stronghold.module.Launcher" target="org.torque.lib.hardware.moving.motor.MotorLink">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.stronghold.module.Arm">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.stronghold.autoProgram.DriveForwardAuto">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.concurrent.Scheduler" target="org.torque.lib.concurrent.RepeatingTask">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.Robot" target="org.torque.stronghold.module.DriveTrain">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.concurrent.Scheduler" target="org.torque.lib.concurrent.DelayedTask">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.lib.hardware.sensor.LimitSwitch" target="org.torque.lib.hardware.sensor.LimitSwitch.LimitSwitchCallThread">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="org.torque.stronghold.module.Arm" target="org.torque.lib.hardware.moving.motor.Motor">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8" x="334.7773153583805" y="595.0314401384027" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
