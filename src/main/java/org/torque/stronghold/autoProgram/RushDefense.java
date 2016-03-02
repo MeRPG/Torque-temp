@@ -7,12 +7,13 @@ import org.torque.stronghold.Robot;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Jaxon A Brown on 2/20/2016.
+ * Created by Jaxon A Brown on 3/2/2016.
  */
-public class DriveForwardAuto extends AutoProgram {
+public class RushDefense extends AutoProgram {
     private final String TRAVEL_TIME_KEY;
     private final String TRAVEL_SPEED_KEY;
-    public DriveForwardAuto() {
+
+    public RushDefense() {
         TRAVEL_TIME_KEY = formatDashboardKey("Travel Time (s)");
         TRAVEL_SPEED_KEY = formatDashboardKey("Travel Speed");
         SmartDashboard.putNumber(TRAVEL_TIME_KEY, 5);
@@ -21,7 +22,7 @@ public class DriveForwardAuto extends AutoProgram {
 
     @Override
     public String getName() {
-        return "Drive Forwards";
+        return "Rush Defense";
     }
 
     @Override

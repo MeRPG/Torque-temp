@@ -1,7 +1,5 @@
 package org.torque.stronghold;
 
-import com.ni.vision.NIVision;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.torque.lib.concurrent.Scheduler;
 import org.torque.lib.def.Driver;
@@ -9,15 +7,16 @@ import org.torque.lib.def.Hand;
 import org.torque.lib.driverstation.hardware.gamepad.Gamepad;
 import org.torque.lib.driverstation.hardware.gamepad.GamepadButton;
 import org.torque.lib.driverstation.hardware.gamepad.RumbleType;
-import org.torque.lib.driverstation.software.dashboard.Dashboard;
 import org.torque.lib.robot.TorqueRobot;
-import org.torque.stronghold.autoProgram.DriveForwardAuto;
+import org.torque.stronghold.autoProgram.ChevalDeFrise;
+import org.torque.stronghold.autoProgram.Portcullis;
+import org.torque.stronghold.autoProgram.ReachDefense;
+import org.torque.stronghold.autoProgram.RushDefense;
 import org.torque.stronghold.module.Arm;
 import org.torque.stronghold.module.DriveTrain;
 import org.torque.stronghold.module.Launcher;
 import org.torque.stronghold.vision.ImageSendbackThread;
 
-import java.lang.reflect.Field;
 import java.util.Date;
 
 /**
@@ -40,7 +39,10 @@ public class Robot extends TorqueRobot {
         Scheduler.scheduleRepeatingTask(imageSendbackThread, 1000, 50);
 
         this.autoEngine = new AutoEngine(this);
-        this.autoEngine.registerAuto(new DriveForwardAuto());
+        this.autoEngine.registerAuto(new ReachDefense());
+        this.autoEngine.registerAuto(new RushDefense());
+        this.autoEngine.registerAuto(new Portcullis());
+        this.autoEngine.registerAuto(new ChevalDeFrise());
 
         System.out.println(this.autoEngine.list());
     }
