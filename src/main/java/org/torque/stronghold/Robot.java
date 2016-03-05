@@ -39,10 +39,10 @@ public class Robot extends TorqueRobot {
         Scheduler.scheduleRepeatingTask(imageSendbackThread, 1000, 50);
 
         this.autoEngine = new AutoEngine(this);
-        this.autoEngine.registerAuto(new ReachDefense());
-        this.autoEngine.registerAuto(new RushDefense());
-        this.autoEngine.registerAuto(new Portcullis());
-        this.autoEngine.registerAuto(new ChevalDeFrise());
+        this.autoEngine.registerAuto(new ReachDefense());//0
+        this.autoEngine.registerAuto(new RushDefense());//1
+        this.autoEngine.registerAuto(new Portcullis());//2
+        this.autoEngine.registerAuto(new ChevalDeFrise());//3
 
         System.out.println(this.autoEngine.list());
     }
