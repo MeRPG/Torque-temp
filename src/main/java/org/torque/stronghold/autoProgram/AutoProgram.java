@@ -3,12 +3,27 @@ package org.torque.stronghold.autoProgram;
 import org.torque.stronghold.Robot;
 
 /**
- * Created by Jaxon A Brown on 2/20/2016.
+ * Autonomous program for the AutoEngine.
  */
-public abstract class AutoProgram {
-    protected final String formatDashboardKey(String input) {
+public interface AutoProgram {
+    /**
+     * Formats a dashboard key
+     * @param input input key name
+     * @return formatted key name with program name for separation
+     */
+    default String formatDashboardKey(String input) {
         return "<" + getName() + "> " + input;
     }
-    public abstract String getName();
-    public abstract void run(Robot robot);
+
+    /**
+     * Configure the name of this program
+     * @return the name of the program
+     */
+    String getName();
+
+    /**
+     * Execute the program
+     * @param robot Robot on which to execute the autonomous
+     */
+    void run(Robot robot);
 }

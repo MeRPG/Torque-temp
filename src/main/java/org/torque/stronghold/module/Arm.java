@@ -5,7 +5,7 @@ import org.torque.lib.hardware.moving.motor.type.VictorMotor;
 import static org.torque.stronghold.ConfigurationService.*;
 
 /**
- * Created by Jaxon A Brown on 2/22/2016.
+ * Module to control the spare arm
  */
 public class Arm {
     private Motor armMotor;
@@ -15,10 +15,18 @@ public class Arm {
         this.armMotor.setReversed(true);
     }
 
+    /**
+     * Set the power of the arm. This value will be multiplied by the ARM_POWER configuration value
+     * @param power power to set the arm to. Use normal [-1, 1] bounds.
+     */
     public void setArmPower(double power) {
         armMotor.setPower(power * ARM_POWER);
     }
 
+    /**
+     * Set the power of the arm. Will NOT be changed.
+     * @param power power, normal [-1, 1] bounds.
+     */
     public void setArmRaw(double power) {
         armMotor.setPower(power);
     }

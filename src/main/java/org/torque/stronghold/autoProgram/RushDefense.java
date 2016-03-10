@@ -7,9 +7,9 @@ import org.torque.stronghold.Robot;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Jaxon A Brown on 3/2/2016.
+ * Crosses a defense by travelling at full speed over it
  */
-public class RushDefense extends AutoProgram {
+public class RushDefense implements AutoProgram {
     private final String TRAVEL_TIME_KEY;
     private final String TRAVEL_SPEED_KEY;
 

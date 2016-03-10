@@ -33,6 +33,7 @@ public class DriveTrain {
      * Intended to use the triggers as the Y axis
      * @param axisX used to turn [-1,1]
      * @param axisY used to go forward [-1,1]
+     * @author William Yount (FRC 3164)
      */
     public void forzaDrive(double axisX, double axisY) {
         axisX = -100 * axisX;
