@@ -7,9 +7,9 @@ import org.torque.stronghold.Robot;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Jaxon A Brown on 2/20/2016.
+ * Approaches a defense, but does not cross it
  */
-public class ReachDefense extends AutoProgram {
+public class ReachDefense implements AutoProgram {
     private final String TRAVEL_TIME_KEY;
     private final String TRAVEL_SPEED_KEY;
 

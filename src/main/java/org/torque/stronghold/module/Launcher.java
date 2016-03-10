@@ -6,6 +6,7 @@ import org.torque.lib.hardware.moving.motor.type.VictorMotor;
 import static org.torque.stronghold.ConfigurationService.*;
 
 /**
+ * Module for the launcher
  * @author Jaxon A Brown
  */
 public class Launcher {

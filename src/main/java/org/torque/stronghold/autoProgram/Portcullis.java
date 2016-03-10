@@ -7,9 +7,9 @@ import org.torque.stronghold.Robot;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Jaxon A Brown on 3/2/2016.
+ * Crosses the Portcullis
  */
-public class Portcullis extends AutoProgram {
+public class Portcullis implements AutoProgram {
     private final String TRAVEL_TIME_REACH_KEY;
     private final String TRAVEL_TIME_CROSS_KEY;
     private final String TRAVEL_SPEED_KEY;
