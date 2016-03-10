@@ -1,6 +1,7 @@
 package org.torque.stronghold.module;
 
 import org.torque.lib.hardware.moving.motor.MotorLink;
+import org.torque.lib.hardware.moving.motor.MotorRevThread;
 import org.torque.lib.hardware.moving.motor.type.TalonMotor;
 import static org.torque.stronghold.ConfigurationService.*;
 
@@ -8,17 +9,20 @@ import static org.torque.stronghold.ConfigurationService.*;
  * @author Jaxon A Brown
  */
 public class DriveTrain {
-    private MotorLink left;
-    private MotorLink right;
+    private MotorRevThread left;
+    private MotorRevThread right;
 
     private boolean reversed;
 
     public DriveTrain() {
         //Create motor links
-        this.left = new MotorLink(new TalonMotor(PORT_DRIVE_LEFT_FRONT), new TalonMotor(PORT_DRIVE_LEFT_REAR));
-        this.right = new MotorLink(new TalonMotor(PORT_DRIVE_RIGHT_FRONT), new TalonMotor(PORT_DRIVE_RIGHT_REAR));
+        MotorLink left = new MotorLink(new TalonMotor(PORT_DRIVE_LEFT_FRONT), new TalonMotor(PORT_DRIVE_LEFT_REAR));
+        MotorLink right = new MotorLink(new TalonMotor(PORT_DRIVE_RIGHT_FRONT), new TalonMotor(PORT_DRIVE_RIGHT_REAR));
         //The left half shall be reversed
         left.setReversed(true);
+
+        (this.left = new MotorRevThread(left)).start();
+        (this.right = new MotorRevThread(right)).start();
 
         //This reverse is different - it inverts the controls as well.
         this.reversed = false;
