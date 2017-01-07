@@ -2,6 +2,7 @@ package org.torque.stronghold;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.torque.lib.concurrent.Scheduler;
+import org.torque.lib.concurrent.Timer;
 import org.torque.lib.def.Driver;
 import org.torque.lib.def.Hand;
 import org.torque.lib.driverstation.hardware.gamepad.Gamepad;
@@ -41,8 +42,12 @@ public class Robot extends TorqueRobot {
 
     public Robot() {
         //Schedule the thread which will send images back to the driver station.
-        this.imageSendbackThread = new ImageSendbackThread();
-        Scheduler.scheduleRepeatingTask(imageSendbackThread, 1000, 50);
+        try {
+            this.imageSendbackThread = new ImageSendbackThread();
+            imageSendbackThread.start();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
         //Register autonomous programs
         this.autoEngine = new AutoEngine(this);
@@ -57,6 +62,8 @@ public class Robot extends TorqueRobot {
 
     @Override
     public void robotInit() {
+        //Scheduler.scheduleRepeatingTask(imageSendbackThread, 5000, 50);
+
         //Initialize the gamepads and subsystems
         this.gamepad1 = new Gamepad(Driver.ONE);
         this.gamepad2 = new Gamepad(Driver.TWO);
@@ -72,6 +79,7 @@ public class Robot extends TorqueRobot {
      */
     @Override
     public void autonomous() {
+        this.imageSendbackThread.begin();
         autoEngine.executeAuto();
     }
 
@@ -80,6 +88,9 @@ public class Robot extends TorqueRobot {
      */
     @Override
     public void teleopInit() {
+        this.imageSendbackThread.setShooterCam(true);
+        this.driveTrain.setReversed(true);
+        this.imageSendbackThread.begin();
         SmartDashboard.putNumber("Upper Launcher Multiplier", ConfigurationService.LAUNCHER_LAUNCH_UPPER_FACTOR);
         SmartDashboard.putNumber("Launcher Power", ConfigurationService.LAUNCHER_LAUNCH_POWER);
     }
@@ -104,12 +115,21 @@ public class Robot extends TorqueRobot {
         //Set the white collecting wheel power. Use right - left triggers to use both inputs
         this.launcher.setCollectorSpeed(gamepad2.getTrigger(Hand.RIGHT) - gamepad2.getTrigger(Hand.LEFT));
         //If the user is holding down the B button, activate the launcher.
-        this.launcher.setLaunching(gamepad2.getButtonState(GamepadButton.B));
+        if(this.gamepad2.getButtonState(GamepadButton.X)) {
+            this.launcher.setLauncherPower(-.6);
+        } else {
+            this.launcher.setLaunching(gamepad2.getButtonState(GamepadButton.B));
+        }
 
         //Check to use Full power mode
         double arm = gamepad2.getAxis(Hand.LEFT).getY();
         if(Math.abs(arm) < 0.3) {
-            this.arm.setArmRaw(gamepad2.getAxis(Hand.RIGHT).getY());
+            arm = gamepad2.getAxis(Hand.RIGHT).getY();
+            if(Math.abs(arm) < 0.3) {
+                this.arm.setArmRaw(-0.12);
+            } else {
+                this.arm.setArmRaw(arm);
+            }
         } else {
             this.arm.setArmPower(arm);
         }
@@ -179,7 +199,8 @@ public class Robot extends TorqueRobot {
 
     @Override
     public void disabledInit() {
-
+        //imageSendbackThread.setCancelled(true);
+        imageSendbackThread.end();
     }
 
     @Override

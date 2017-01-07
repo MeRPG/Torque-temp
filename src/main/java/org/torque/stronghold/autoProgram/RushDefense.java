@@ -17,7 +17,7 @@ public class RushDefense implements AutoProgram {
         TRAVEL_TIME_KEY = formatDashboardKey("Travel Time (s)");
         TRAVEL_SPEED_KEY = formatDashboardKey("Travel Speed");
         SmartDashboard.putNumber(TRAVEL_TIME_KEY, 5);
-        SmartDashboard.putNumber(TRAVEL_SPEED_KEY, 1.0);
+        SmartDashboard.putNumber(TRAVEL_SPEED_KEY, -1.0);
     }
 
     @Override

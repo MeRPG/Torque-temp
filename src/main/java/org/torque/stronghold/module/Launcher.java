@@ -45,6 +45,11 @@ public class Launcher {
         }
     }
 
+    public void setLauncherPower(double power) {
+        launchLower.setPower(power);
+        launchUpper.setPower(power);
+    }
+
     public boolean isAtFullSpeed() {
         return wasLaunching && startedLaunching < System.currentTimeMillis() - 1250;
     }

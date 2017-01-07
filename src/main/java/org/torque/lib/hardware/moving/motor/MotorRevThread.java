@@ -22,6 +22,7 @@ public class MotorRevThread extends Thread {
 
     @Override
     public void run() {
+        System.out.println("updating motor thread");
         double diff = setPoint - target.getPower();
         double inc = diff < 0 ? Math.max(diff, 0.05) : Math.min(0.05, diff);
         target.setPower(target.getPower() + inc);
